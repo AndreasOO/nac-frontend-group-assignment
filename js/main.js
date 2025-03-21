@@ -33,7 +33,7 @@ document.getElementById("confirmOrderModal").addEventListener("hidden.bs.modal",
 
 function resetModal() {
     Array.from(document.getElementsByClassName("error-message")).forEach(message => {
-        message.textContent = "";
+        toggleErrorDisplay(message, true);
     })
 }
 
