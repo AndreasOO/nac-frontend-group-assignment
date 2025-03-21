@@ -23,7 +23,9 @@ async function fetchProducts() {
 const errorName = document.getElementById("error-name");
 const errorEmail = document.getElementById("error-email");
 const errorPhone = document.getElementById("error-phone");
-const errorAddress = document.getElementById("error-address");
+const errorStreet = document.getElementById("error-street");
+const errorCity = document.getElementById("error-city");
+const errorPostal = document.getElementById("error-postal");
 
 document.getElementById("confirmOrderModal").addEventListener("hidden.bs.modal", () => {
     resetModal();
@@ -35,23 +37,32 @@ function resetModal() {
     })
 }
 
-function displayErrorMessage(element, message) {
-    element.textContent = message;
+function displayErrorMessage(element, isError) {
+    if(!isError) {
+        element.classList.remove("d-none");
+    }
+    else{
+        element.classList.add("d-none");
+    }
 }
 
 document.getElementById("order-form").addEventListener("submit", function (event){
     event.preventDefault();
-    errorName.textContent = isValidName(document.getElementById("name").value) ? "" : "Please enter a valid name!";
-    errorEmail.textContent = isValidEmail(document.getElementById("email").value) ? "" : "Please enter a valid email!";
-    errorPhone.textContent = isValidPhone(document.getElementById("phone").value) ? "" : "Please enter a valid phone number!";
-    errorAddress.textContent = isValidAddress(document.getElementById("street").value,
-                                            document.getElementById("postal-code").value,
-                                            document.getElementById("city").value) ? "" : "Please enter a valid address!";
+    displayErrorMessage(errorName, isValidName(document.getElementById("name").value));
+    displayErrorMessage(errorEmail, isValidEmail(document.getElementById("email").value));
+    displayErrorMessage(errorPhone,isValidPhone(document.getElementById("phone").value));
+    displayErrorMessage(errorStreet, isValidStreet(document.getElementById("street").value));
+    displayErrorMessage(errorPostal, isValidPostalCode(document.getElementById("postal-code").value));
+    displayErrorMessage(errorCity, isValidCity(document.getElementById("city").value));
 });
 
+function isValidLength(value){
+    const lengthPattern = /^.{2,50}$/;
+    return lengthPattern.test(value);
+}
+
 function isValidName(name){
-    const namePattern = /^.{2,50}$/;
-    return namePattern.test(name);
+    return isValidLength(name);
 }
 
 function isValidEmail(email){
@@ -64,8 +75,14 @@ function isValidPhone(phoneNumber){
     return phonePattern.test(phoneNumber);
 }
 
-function isValidAddress(street, postalCode, city){
-    const streetAndCityPattern = /^.{2,50}$/;
-    const postalCodePattern = /^.{5}$/
-    return streetAndCityPattern.test(street) && streetAndCityPattern.test(city) && postalCodePattern.test(postalCode);
+function isValidCity(city){
+    return isValidLength(city);
+}
+
+function isValidPostalCode(postalCode){
+    const postalCodePattern = /^.{5}$/;
+    return postalCodePattern.test(postalCode);
+}
+function isValidStreet(street){
+    return isValidLength(street);
 }
