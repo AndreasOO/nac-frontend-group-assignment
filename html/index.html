@@ -41,33 +41,38 @@
                     <h5 class="modal-title" id="confirmOrderModalLabel">Enter Shipping Details and Confirm</h5>
                 </div>
                 <!--Enter form here-->
-                <form>
-                    <div class="p-2">
+                <form id="order-form">
+                    <div class="p-2" id="name-container">
                         <label for="name" class="form-label">Full name:</label>
                         <input type="text" class="form-control" id="name" placeholder="Firstname Lastname...">
+                        <p class="text-danger fst-italic error-display d-none" id="error-name">Please enter a valid name!</p>
                     </div>
                     <div class="p-2">
                         <label class="form-label" for="email">E-mail:</label>
                         <input class="form-control" type="email" id="email" placeholder="user@example.com">
+                        <p class="text-danger fst-italic error-display d-none" id="error-email">Please enter a valid email address!</p>
                     </div>
                     <div class="p-2">
                         <label class="form-label" for="phone">Phone number:</label>
                         <input class="form-control" type="text" id="phone" placeholder="(46)70-000_00_00">
+                        <p class="text-danger fst-italic error-display d-none" id="error-phone">Please enter a valid phone number!</p>
                     </div>
                     <div class="p-2">
                         <label class="form-label" for="street">Street address:</label>
                         <input class="form-control" type="text" id="street" placeholder="example street 1">
+                        <p class="text-danger fst-italic error-display d-none" id="error-street">Please enter a valid street!</p>
                     </div>
                     <div class="p-2">
                         <label class="form-label" for="postal-code">Zip/Postal code:</label>
                         <input class="form-control" type="text" id="postal-code" placeholder="000 00">
+                        <p class="text-danger fst-italic error-display d-none" id="error-postal">Please enter a valid zip-code!</p>
                     </div>
                     <div class="p-2">
                         <label class="form-label" for="city">City:</label>
                         <input class="form-control" type="text" id="city" placeholder="City...">
+                        <p class="text-danger fst-italic error-display d-none" id="error-city">Please enter a valid city name!</p>
                     </div>
-                    <div class="form-text p-2">Validation error messages here...</div>
-                    <button class="btn btn-dark ms-2 mb-2" type="submit">Submit</button>
+                    <button class="btn btn-dark ms-2 mb-2" id="submit-button" type="submit">Submit</button>
                 </form>
             </div>
         </div>
