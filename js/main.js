@@ -32,8 +32,8 @@ document.getElementById("confirmOrderModal").addEventListener("hidden.bs.modal",
 })
 
 function resetModal() {
-    Array.from(document.getElementsByClassName("error-message")).forEach(message => {
-        toggleErrorDisplay(message, true);
+    Array.from(document.getElementsByClassName("error-display")).forEach(element => {
+        toggleErrorDisplay(element, true);
     })
 }
 
