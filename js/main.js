@@ -20,6 +20,52 @@ async function fetchProducts() {
     );
 }
 
-console.log(fetchProducts())
+const errorName = document.getElementById("error-name");
+const errorEmail = document.getElementById("error-email");
+const errorPhone = document.getElementById("error-phone");
+const errorAddress = document.getElementById("error-address");
 
+document.getElementById("confirmOrderModal").addEventListener("hidden.bs.modal", () => {
+    resetModal();
+})
 
+function resetModal() {
+    Array.from(document.getElementsByClassName("error-message")).forEach(message => {
+        message.textContent = "";
+    })
+}
+
+function displayErrorMessage(element, message) {
+    element.textContent = message;
+}
+
+document.getElementById("order-form").addEventListener("submit", function (event){
+    event.preventDefault();
+    errorName.textContent = isValidName(document.getElementById("name").value) ? "" : "Please enter a valid name!";
+    errorEmail.textContent = isValidEmail(document.getElementById("email").value) ? "" : "Please enter a valid email!";
+    errorPhone.textContent = isValidPhone(document.getElementById("phone").value) ? "" : "Please enter a valid phone number!";
+    errorAddress.textContent = isValidAddress(document.getElementById("street").value,
+                                            document.getElementById("postal-code").value,
+                                            document.getElementById("city").value) ? "" : "Please enter a valid address!";
+});
+
+function isValidName(name){
+    const namePattern = /^.{2,50}$/;
+    return namePattern.test(name);
+}
+
+function isValidEmail(email){
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+}
+
+function isValidPhone(phoneNumber){
+    const phonePattern = /^(?=.*\d)[0-9)(-]{1,50}$/;
+    return phonePattern.test(phoneNumber);
+}
+
+function isValidAddress(street, postalCode, city){
+    const streetAndCityPattern = /^.{2,50}$/;
+    const postalCodePattern = /^.{5}$/
+    return streetAndCityPattern.test(street) && streetAndCityPattern.test(city) && postalCodePattern.test(postalCode);
+}
