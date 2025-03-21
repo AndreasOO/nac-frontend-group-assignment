@@ -37,8 +37,8 @@ function resetModal() {
     })
 }
 
-function displayErrorMessage(element, isError) {
-    if(!isError) {
+function displayErrorMessage(element, isValidInput) {
+    if(!isValidInput) {
         element.classList.remove("d-none");
     }
     else{
