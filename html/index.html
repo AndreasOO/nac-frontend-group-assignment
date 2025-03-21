@@ -9,7 +9,7 @@
 </head>
 <body class="vh-100 vw-100 row">
     <nav class="navbar navbar-expand-sm bg-secondary col-12 fixed-top">
-        <a class="navbar-brand" data-bs-toggle="modal" href="#">Jalla-Shop</a>
+        <a class="navbar-brand" data-bs-toggle="modal" href="#">5</a>
         <ul class="navbar-nav">
             <li class="nav-item px-3">Home</li>
             <li class="nav-item  px-3">Products</li>
@@ -19,6 +19,20 @@
     <section class="col-12 py-5">
         <p>main content</p>
     </section>
+    <aside>
+        <!--We can use data-bs-whatever to store product id in every button, then use that to get selected product via fetch when button is pressed-->
+        <a class="btn bg-secondary bg-gradient" data-bs-toggle="modal" data-bs-target="#confirmOrderModal" data-bs-whatever="1">Modal button</a>
+    </aside>
+    <div class="modal fade" id="confirmOrderModal" tabindex="-1" role="dialog" aria-labelledby="confirmOrderModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document" >
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmOrderModalLabel">Enter Shipping Details and Confirm</h5>
+                </div>
+                <!--Enter form here-->
+            </div>
+        </div>
+    </div>
     <footer class="text-center p-2 position-absolute bottom-0 start-0 w-100 bg-secondary">
         <p>© 2025 Copyright</p>
     </footer>
