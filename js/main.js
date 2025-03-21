@@ -37,7 +37,7 @@ function resetModal() {
     })
 }
 
-function displayErrorMessage(element, isValidInput) {
+function toggleErrorDisplay(element, isValidInput) {
     if(!isValidInput) {
         element.classList.remove("d-none");
     }
@@ -48,12 +48,12 @@ function displayErrorMessage(element, isValidInput) {
 
 document.getElementById("order-form").addEventListener("submit", function (event){
     event.preventDefault();
-    displayErrorMessage(errorName, isValidName(document.getElementById("name").value));
-    displayErrorMessage(errorEmail, isValidEmail(document.getElementById("email").value));
-    displayErrorMessage(errorPhone,isValidPhone(document.getElementById("phone").value));
-    displayErrorMessage(errorStreet, isValidStreet(document.getElementById("street").value));
-    displayErrorMessage(errorPostal, isValidPostalCode(document.getElementById("postal-code").value));
-    displayErrorMessage(errorCity, isValidCity(document.getElementById("city").value));
+    toggleErrorDisplay(errorName, isValidName(document.getElementById("name").value));
+    toggleErrorDisplay(errorEmail, isValidEmail(document.getElementById("email").value));
+    toggleErrorDisplay(errorPhone,isValidPhoneNumber(document.getElementById("phone").value));
+    toggleErrorDisplay(errorStreet, isValidStreet(document.getElementById("street").value));
+    toggleErrorDisplay(errorPostal, isValidPostalCode(document.getElementById("postal-code").value));
+    toggleErrorDisplay(errorCity, isValidCity(document.getElementById("city").value));
 });
 
 function isValidLength(value){
@@ -70,7 +70,7 @@ function isValidEmail(email){
     return emailPattern.test(email);
 }
 
-function isValidPhone(phoneNumber){
+function isValidPhoneNumber(phoneNumber){
     const phonePattern = /^(?=.*\d)[0-9)(-]{1,50}$/;
     return phonePattern.test(phoneNumber);
 }
