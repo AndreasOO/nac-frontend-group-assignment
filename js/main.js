@@ -48,12 +48,24 @@ function toggleErrorDisplay(element, isValidInput) {
 
 document.getElementById("order-form").addEventListener("submit", function (event){
     event.preventDefault();
-    toggleErrorDisplay(errorName, isValidName(document.getElementById("name").value));
-    toggleErrorDisplay(errorEmail, isValidEmail(document.getElementById("email").value));
-    toggleErrorDisplay(errorPhone,isValidPhoneNumber(document.getElementById("phone").value));
-    toggleErrorDisplay(errorStreet, isValidStreet(document.getElementById("street").value));
-    toggleErrorDisplay(errorPostal, isValidPostalCode(document.getElementById("postal-code").value));
-    toggleErrorDisplay(errorCity, isValidCity(document.getElementById("city").value));
+
+    const validName = isValidName(document.getElementById("name").value);
+    const validEmail = isValidEmail(document.getElementById("email").value);
+    const validPhone = isValidPhoneNumber(document.getElementById("phone").value);
+    const validStreet = isValidStreet(document.getElementById("street").value);
+    const validPostalCode = isValidPostalCode(document.getElementById("postal-code").value);
+    const validCity = isValidCity(document.getElementById("city").value);
+
+    toggleErrorDisplay(errorName, validName);
+    toggleErrorDisplay(errorEmail, validEmail);
+    toggleErrorDisplay(errorPhone, validPhone);
+    toggleErrorDisplay(errorStreet, validStreet);
+    toggleErrorDisplay(errorPostal, validPostalCode);
+    toggleErrorDisplay(errorCity, validCity);
+
+    if (validName && validEmail &&validPhone && validStreet && validPostalCode && validCity) {
+        this.submit();
+    }
 });
 
 function isValidLength(value){
