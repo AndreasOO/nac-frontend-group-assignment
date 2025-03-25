@@ -62,6 +62,7 @@ function isValidLength(value){
     return lengthPattern.test(value);
 }
 
+
 function isValidName(name){
     const namePattern = /^(?=.{1,50}$)[\p{Letter}\p{Mark}\s\-]+ [\p{Letter}\p{Mark}\s\- ]+$/gu;
     return namePattern.test(name);
