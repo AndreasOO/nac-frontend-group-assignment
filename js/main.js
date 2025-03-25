@@ -1,9 +1,12 @@
 class Item {
-    constructor(id, title, price, rating, description, image) {
+    constructor(id, title, price, ratingValue, ratingCount, description, image) {
         this.id = id;
         this.title = title;
         this.price = price;
-        this.rating = rating;
+        this.rating = {
+            value: ratingValue,
+            count: ratingCount
+        };
         this.description = description;
         this.image = image;
     }
@@ -14,22 +17,12 @@ async function fetchProducts() {
         json => json.map(productJsonObject => new Item(productJsonObject.id,
             productJsonObject.title,
             productJsonObject.price,
-            productJsonObject.rating,
+            productJsonObject.rating.rate,
+            productJsonObject.rating.count,
             productJsonObject.description,
             productJsonObject.image))
     );
 }
-
-// <div className="card" style="width: 18rem;">
-//     <img src="image" className="card-img-top" alt="..."/>
-//     <div className="card-body">
-//         <h5 className="card-title">title</h5>
-//         <p className="card-text">description</p>
-//         <p className="card-text">price</p>
-//         <p className="card-text">rating</p>
-//         <a href="#" className="btn btn-primary">BUY</a>
-//     </div>
-// </div>
 
 function createCard(item) {
     const productContainer = document.getElementById("products");
@@ -59,7 +52,7 @@ function createCard(item) {
 
     const rating = document.createElement("p");
     rating.classList.add("card-text");
-    rating.textContent = "Rating: " + item.rating;
+    rating.textContent = "Rating: " + item.rating.value + " Count: " + item.rating.count;
 
     const button = document.createElement("a");
     button.classList.add("btn", "btn-primary", "col-12");
@@ -67,9 +60,6 @@ function createCard(item) {
     button.setAttribute("data-bs-target", "#confirmOrderModal")
     button.setAttribute("data-bs-whatever", item.id)
     button.innerText = "Buy";
-
-    // <a className="btn bg-secondary bg-gradient" data-bs-toggle="modal" data-bs-target="#confirmOrderModal"
-    //    data-bs-whatever="1">Modal button</a>
 
     cardBody.append(title, description, price, rating, button);
     cardContainer.append(imgElement, cardBody);
@@ -147,4 +137,4 @@ function isValidStreet(street) {
 
 fetchProducts().then(itemList => itemList.forEach(item => {
     createCard(item)
-}))
+}));
