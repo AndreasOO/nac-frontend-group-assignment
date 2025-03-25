@@ -19,21 +19,10 @@
     </nav>
     <section class="col-12 py-5">
         <p>main content</p>
-        <div class="card" style="width: 18rem;">
-            <img src="image" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">title</h5>
-                <p class="card-text">description</p>
-                <p class="card-text">price</p>
-                <p class="card-text">rating</p>
-                <a href="#" class="btn btn-primary">BUY</a>
-            </div>
+        <div id="products" class="row">
+
         </div>
     </section>
-    <aside>
-        <!--We can use data-bs-whatever to store product id in every button, then use that to get selected product via fetch when button is pressed-->
-        <a class="btn bg-secondary bg-gradient" data-bs-toggle="modal" data-bs-target="#confirmOrderModal" data-bs-whatever="1">Modal button</a>
-    </aside>
     <div class="modal fade" id="confirmOrderModal" tabindex="-1" role="dialog" aria-labelledby="confirmOrderModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document" >
             <div class="modal-content bg-secondary">
@@ -77,7 +66,7 @@
             </div>
         </div>
     </div>
-    <footer class="text-center p-2 position-absolute bottom-0 start-0 w-100 bg-secondary">
+    <footer class="text-center p-2 bottom-0 start-0 w-100 bg-secondary">
         <p>© 2025 Copyright</p>
     </footer>
 
