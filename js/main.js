@@ -54,6 +54,7 @@ document.getElementById("order-form").addEventListener("submit", function (event
     toggleErrorDisplay(errorStreet, isValidStreet(document.getElementById("street").value));
     toggleErrorDisplay(errorPostal, isValidPostalCode(document.getElementById("postal-code").value));
     toggleErrorDisplay(errorCity, isValidCity(document.getElementById("city").value));
+
 });
 
 function isValidLength(value){
@@ -62,16 +63,18 @@ function isValidLength(value){
 }
 
 function isValidName(name){
-    return isValidLength(name);
+    const namePattern = /^(?=.{1,50}$)[\p{Letter}\p{Mark}\s\-]+ [\p{Letter}\p{Mark}\s\- ]+$/gu;
+    return namePattern.test(name);
 }
 
+
 function isValidEmail(email){
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailPattern =  /^(?=.{1,50}$)[a-zA-Z0-9._-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9.]+$/;
     return emailPattern.test(email);
 }
 
 function isValidPhoneNumber(phoneNumber){
-    const phonePattern = /^(?=.*\d)[0-9)(-]{1,50}$/;
+    const phonePattern = /^[0-9)(-]{1,50}$/;
     return phonePattern.test(phoneNumber);
 }
 
@@ -80,7 +83,7 @@ function isValidCity(city){
 }
 
 function isValidPostalCode(postalCode){
-    const postalCodePattern = /^.{5}$/;
+    const postalCodePattern = /^\d{5}$/;
     return postalCodePattern.test(postalCode);
 }
 function isValidStreet(street){
