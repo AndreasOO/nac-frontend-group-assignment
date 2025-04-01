@@ -1,0 +1,10 @@
+.card-text::before {
+    content: "➜ ";
+    color: blue;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.buy-button {
+
+}
