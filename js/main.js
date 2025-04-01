@@ -28,7 +28,7 @@ function createCard(item) {
     const productContainer = document.getElementById("products");
 
     const cardContainer = document.createElement("div");
-    cardContainer.classList.add("card", "col-3");
+    cardContainer.classList.add("card", "col-12","col-md-5", "col-lg-2", "p-2");
 
     const cardBody = document.createElement("div")
     cardBody.classList.add("card-body");
