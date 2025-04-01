@@ -48,19 +48,18 @@ function createCard(item) {
 
     const price = document.createElement("p");
     price.classList.add("card-text");
-    price.textContent = `Price: ${item.price}$`;
+    price.textContent = `Price: $${item.price}`;
 
     const rating = document.createElement("p");
     rating.classList.add("card-text");
-    rating.textContent = "Rating: " + item.rating.value + " Count: " + item.rating.count;
+    rating.textContent = "Rated: " + item.rating.value + " by " + item.rating.count + " customers";
 
     const button = document.createElement("a");
-    button.classList.add("btn", "btn-primary", "col-12");
+    button.classList.add("btn", "btn-primary", "col-12", "buy-button");
     button.setAttribute("data-bs-toggle", "modal");
     button.setAttribute("data-bs-target", "#confirmOrderModal")
     button.setAttribute("data-bs-whatever", item.id)
     button.innerText = "Buy";
-
     cardBody.append(title, description, price, rating, button);
     cardContainer.append(imgElement, cardBody);
     productContainer.append(cardContainer)
@@ -151,3 +150,55 @@ function isValidStreet(street) {
 fetchProducts().then(itemList => itemList.forEach(item => {
     createCard(item)
 }));
+
+
+document.getElementById("products").addEventListener("click", e => {
+    if (e.target.classList.contains("buy-button")) {
+        const prodID = e.target.getAttribute("data-bs-whatever")
+        getSelectedProduct(prodID);
+    }
+});
+
+
+
+
+async function getSelectedProduct(num) {
+    const product = await fetch(`https://fakestoreapi.com/products/${num}`)
+        .then(res => res.json())
+        .then(json => new Item(json.id,
+            json.title,
+            json.price,
+            json.rating.rate,
+            json.rating.count,
+            json.description,
+            json.image)
+        );
+
+    const listItemName = document.createElement("li");
+    const listItemProductPrice = document.createElement("li");
+    const listItemTotalPrice = document.createElement("li");
+
+    listItemName.textContent = product.title;
+    listItemProductPrice.textContent = '$' + product.price;
+    listItemTotalPrice.textContent = '$' + product.price;
+
+    listItemName.classList.add("list-group-item", "col-6");
+    listItemProductPrice.classList.add("list-group-item", "col-6");
+    listItemTotalPrice.classList.add("list-group-item","col-6");
+
+    const orderSum = document.getElementById("orderSummary");
+    const totalPrice = document.getElementById("totalPrice");
+
+    while (orderSum.firstChild) {
+        orderSum.removeChild(orderSum.lastChild);
+    }
+
+    while (totalPrice.firstChild) {
+        totalPrice.removeChild(totalPrice.lastChild);
+    }
+
+    orderSum.appendChild(listItemName);
+    orderSum.appendChild(listItemProductPrice);
+    totalPrice.appendChild(listItemTotalPrice);
+
+}
